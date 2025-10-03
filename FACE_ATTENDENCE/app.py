@@ -12,7 +12,7 @@ from scipy.spatial import distance as dist
 import time
 import pandas as pd
 
-st.set_page_config(page_title="NBKR Smart Attendance", layout="wide")
+st.set_page_config(page_title="Virtual Police", layout="wide")
 st.markdown("""
 <style>
 .sidebar .sidebar-content {
@@ -54,7 +54,7 @@ ATT_DIR = os.path.join(BASE_DIR, "criminal_logs")
 os.makedirs(ATT_DIR, exist_ok=True)
 
 # Sidebar menu
-st.sidebar.title("📋 NBKR Attendance System")
+st.sidebar.title("📋 Virtual Police")
 st.sidebar.markdown("---")
 
 if "action" not in st.session_state:
@@ -69,12 +69,12 @@ if st.sidebar.button("📸 Mark Attendance"):
 if st.sidebar.button("📂 View Attendance Logs"):
     st.session_state['action'] = "view_logs"
 
-st.markdown("<h1>📸 NBKR Smart Attendance System</h1>", unsafe_allow_html=True)
+st.markdown("<h1>📸 Virtual Police</h1>", unsafe_allow_html=True)
 st.markdown("<hr>", unsafe_allow_html=True)
 
 
 if st.session_state['action'] == "home":
-    st.write("✅ Welcome to NBKR Smart Attendance System")
+    st.write("✅ Welcome to Virtual Police")
     st.info("Use the left panel to register criminals, train encodings, mark attendance, or view logs.")
 
 elif st.session_state['action'] == "register":
@@ -157,7 +157,7 @@ elif st.session_state['action'] == "attendance":
         TIME_LIMIT = 10
 
         stframe = st.empty()
-        run = st.button("Start Attendance")
+        run = st.button("Start Detection")
 
         attendance_marked_faces = set()
 
@@ -243,7 +243,7 @@ elif st.session_state['action'] == "attendance":
                                 with open(csv_path, "a", newline="") as f:
                                     writer = csv.writer(f)
                                     writer.writerow([name, date_str, time_str])
-                                st.success(f"✅ Attendance marked for {name} at {time_str}")
+                                st.success(f"✅ Detection marked for {name} at {time_str}")
                                 attendance_marked_faces.add(i)
 
                 elapsed = time.time() - start_time
@@ -257,7 +257,7 @@ elif st.session_state['action'] == "attendance":
             cap.release()
 
 elif st.session_state['action'] == "view_logs":
-    st.subheader("📂 View Attendance Logs")
+    st.subheader("📂 View Detected Logs")
     csv_files = [f for f in os.listdir(ATT_DIR) if f.endswith(".csv")]
     if csv_files:
         selected_csv = st.selectbox("Select Date", csv_files)
