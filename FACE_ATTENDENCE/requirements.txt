@@ -6,3 +6,4 @@ python-dateutil
 flask
 pillow
 streamlit
+dlib
